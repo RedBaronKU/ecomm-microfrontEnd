@@ -1,10 +1,21 @@
 import faker from "faker";
 
-let products = "";
+const mount = (el) => {
+  let products = "";
 
-for (let i = 0; i < 5; i++) {
-  const name = faker.commerce.productName();
-  products += `<div>${name}</div>`;
+  for (let i = 0; i < 5; i++) {
+    const name = faker.commerce.productName();
+    products += `<div>${name}</div>`;
+  }
+  el.innerHTML = products;
+  //ReactDom.render(<App />, el);
+};
+
+if (process.env.NODE_ENV === "development") {
+  const el = document.querySelector("#dev-products-dev-only");
+  if (el) {
+    mount(el);
+  }
 }
 
-document.getElementById("dev-products").innerHTML = products;
+export { mount };

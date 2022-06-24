@@ -1,5 +1,16 @@
 import faker from "faker";
 
-const cartText = `<div>You Have ${faker.datatype.number()} items</div>`;
+const mount = (el) => {
+  const cartText = `<div>You Have ${faker.datatype.number()} items</div>`;
+  el.innerHTML = cartText;
+};
 
-document.querySelector("#dev-cart").innerHTML = cartText;
+if (process.env.NODE_ENV === "development") {
+  const el = document.querySelector("#cart-dev");
+
+  if (el) {
+    mount(el);
+  }
+}
+
+export { mount };
